@@ -93,7 +93,7 @@ def eating_cookies(n, cache=None):
  
   # original fibionacci seq function would be:
   # return eating_cookies(n-1) + eating_cookies(n-2) 
-  #but in this case to get the desired value we have to pass in n - 3 too
+  # But in this case to get the desired value we have to pass in n - 3 too
     else: 
       return eating_cookies(n-1) + eating_cookies(n-2) + eating_cookies(n-3)
 
