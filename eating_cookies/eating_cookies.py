@@ -84,7 +84,7 @@ import sys
 # for each val of n (or cookies in this case) but recursively calling the function to get the 
 # fib of n - 3 on each call too:
 
-def eating_cookies(n, cache=None): 
+def eating_cookies(n): 
   # base cases to return from recursion:
     if n<0: 
         return 0
@@ -96,6 +96,29 @@ def eating_cookies(n, cache=None):
   # But in this case to get the desired value we have to pass in n - 3 too
     else: 
       return eating_cookies(n-1) + eating_cookies(n-2) + eating_cookies(n-3)
+
+def optimized_eating_cookies(n, cache=None): 
+  # base cases 
+    if n<0: 
+        return 0
+    elif n==0: 
+        return 1
+
+    # check if value already in the cache at index n
+    elif cache and cache[n] > 0:
+        # return cache at index of n       
+        return cache[n]
+
+    else: 
+      # test if cache exists - if not create one
+      if not cache:
+        # if not create a cache with range based loop
+        cache = {i: 0 for i in range(n + 1)}
+      # set a cache at n to the recursive call passing the cache as we go
+      cache[n] = eating_cookies(n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
+      # return cache at n
+      return cache[n]      
+
 
 if __name__ == "__main__":
   if len(sys.argv) > 1:
