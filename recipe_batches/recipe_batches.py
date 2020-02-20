@@ -5,7 +5,13 @@ import math
 def recipe_batches(recipe, ingredients):
   # 1: make sure we have all ingredients, regardless of quantity
   # ie. if recipe dictionary has key 'cheese' and ingredients doesn't, return 0
-  if recipe.keys() != ingredients.keys():
+  # originally checked to see if the keys were identical in each dictionary:
+  # if recipe.keys() != ingredients.keys(): return 0
+  # but this doesn't take into account that you might have an extra key in ingredients dictionary that 
+  # isn't in recipe dictionary AND still have enough ingredients to make the recipe
+  # Therefore, refactored to the code below. This transforms both dictionaries into sets and makes sure that set on 
+  # RHS has all keys on LHS, even if it has some extra keys
+  if len(set(recipe) - set(ingredients)) != 0:
     return 0
   
   # 2: for every ingredient in the recipe (for every key in recipe dict), 
@@ -22,7 +28,6 @@ def recipe_batches(recipe, ingredients):
   # (if the maximum no of batches we could make with the milk we have is 500 but the maximum no. of batches we could 
   # make with the butter we have is only 10, we're still only going to be able to make 10 batches)
   return min(max_batches)
-
 
 if __name__ == '__main__':
   # Change the entries of these dictionaries to test 
