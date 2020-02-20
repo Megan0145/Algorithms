@@ -6,15 +6,17 @@ def rock_paper_scissors(n):
   result = []
   options = ['rock', 'paper', 'scissors']
 
-  def play(played, n):  
+  def play(turn, played = []):  
     # base case: if n = 0, just append the results
-    if n == 0: 
-      result.append([played])
+    if turn == 0: 
+      result.append(played)
+      return
+
     else:
       for i in range(3):
-        play(played + options[i], n - 1)
+        play(turn - 1, played + [options[i]])
 
-  play('', n)
+  play(n)
   return result
 
 print(rock_paper_scissors(2))  
